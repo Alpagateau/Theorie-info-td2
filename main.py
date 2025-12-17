@@ -43,12 +43,17 @@ def huffman_code(p):
     words = get_cwd(tree)
     return (words, sum([len(w)/len(words) for w in words]))
 
-def huffman_tree2(cwd):
+def huffman_tree2(cwd, symbol = ""):
     if len(cwd) == 0:
-        return Node(None, None, 0, 0)
+        n = Node(None, None, 0, 0)
+        n.symbol = symbol
+        return  n
     cwdl = [i[1:] for i in cwd if len(i) > 1 and i[0] == "0"]
     cwdr = [i[1:] for i in cwd if len(i) > 1 and i[0] == "1"] 
-    return Node(huffman_tree2(cwdl), huffman_tree2(cwdr), 0, 0)
+    return Node(huffman_tree2(cwdl, symbol + "0"), huffman_tree2(cwdr, symbol + "1"), 0, 0)
+
+#def cwd_detect(tree, seq):
+#
 
 a = huffman_tree([0.1, 0.1, 0.15, 0.16, 2])
 cdw = get_cwd(a)
