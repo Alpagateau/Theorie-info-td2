@@ -65,13 +65,12 @@ def decode(seq, symb, cwd):
     tree = huffman_tree2(cwd)
     words = []
     sequence = "" + seq #copy of seq
-    #while len(sequence) > 1
-    #(i, c) = cwd_detect
-
+    dic = { k:v for (k,v) in zip(cwd, symb)}
+    while len(sequence) > 1:
+        (c, i) = cwd_detect(tree, sequence)
+        words += [c]
+        sequence = sequence[:i+1]
+    out = [dic[k] for k in words]
+    return out 
 
 a = huffman_tree([0.1, 0.1, 0.15, 0.16, 2])
-cdw = get_cwd(a)
-print(a)
-print(huffman_code([0.1, 0.1, 0.15, 0.16, 2]))
-b = huffman_tree2(cdw)
-print(b)
