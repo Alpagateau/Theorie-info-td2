@@ -25,7 +25,7 @@ def get_cwd(tree):
         return [""]
     if tree.l == None and tree.r == None:
         return [""]
-    return ["0" + s for s in get_cwd(tree.l)] +["1" + s for s in get_cwd(tree.r)]
+    return ["0" + s for s in get_cwd(tree.l)] + ["1" + s for s in get_cwd(tree.r)]
 
 def tag_tree(tree, acc, symbols = []):
     if tree.l == None and tree.r == None:
@@ -54,12 +54,15 @@ def huffman_tree2(cwd, symbol = ""):
 
 def cwd_detect(tree, seq, idx = 0):
     if tree.l == None and tree.r == None:
-        return (seq[:idx+1], idx)
+        return (seq[:idx], idx)
     else:
-        if seq[idx] == "0":
-            return cwd_detect(tree.l, seq, idx+1)
+        if idx < len(seq):
+            if seq[idx] == "0":
+                return cwd_detect(tree.l, seq, idx+1)
+            else:
+                return cwd_detect(tree.r, seq, idx+1)
         else:
-            return cwd_detect(tree.r, seq, idx+1)
+            return None
 
 def decode(seq, symb, cwd):
     tree = huffman_tree2(cwd)
@@ -67,10 +70,13 @@ def decode(seq, symb, cwd):
     sequence = "" + seq #copy of seq
     dic = { k:v for (k,v) in zip(cwd, symb)}
     while len(sequence) > 1:
-        (c, i) = cwd_detect(tree, sequence)
+        t = cwd_detect(tree, sequence)
+        if t == None:
+            break
+        (c,i) = t
+        print(len(sequence), i, c)
         words += [c]
         sequence = sequence[i+1:]
     out = [dic[k] for k in words]
     return out 
 
-a = huffman_tree([0.1, 0.1, 0.15, 0.16, 2])
