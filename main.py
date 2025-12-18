@@ -25,7 +25,7 @@ def get_cwd(tree):
         return [""]
     if tree.l == None and tree.r == None:
         return [""]
-    return ["0" + s for s in get_cwd(tree.l)] +["1" + s for s in get_cwd(tree.r)]
+    return ["0" + s for s in get_cwd(tree.l)] + ["1" + s for s in get_cwd(tree.r)]
 
 def tag_tree(tree, acc, symbols = []):
     if tree.l == None and tree.r == None:
@@ -54,12 +54,15 @@ def huffman_tree2(cwd, symbol = ""):
 
 def cwd_detect(tree, seq, idx = 0):
     if tree.l == None and tree.r == None:
-        return (seq[:idx+1], idx)
+        return (seq[:idx], idx)
     else:
-        if seq[idx] == "0":
-            return cwd_detect(tree.l, seq, idx+1)
+        if idx < len(seq):
+            if seq[idx] == "0":
+                return cwd_detect(tree.l, seq, idx+1)
+            else:
+                return cwd_detect(tree.r, seq, idx+1)
         else:
-            return cwd_detect(tree.r, seq, idx+1)
+            return None
 
 def decode(seq, symb, cwd):
     tree = huffman_tree2(cwd)
@@ -67,10 +70,37 @@ def decode(seq, symb, cwd):
     sequence = "" + seq #copy of seq
     dic = { k:v for (k,v) in zip(cwd, symb)}
     while len(sequence) > 1:
-        (c, i) = cwd_detect(tree, sequence)
+        t = cwd_detect(tree, sequence)
+        if t == None:
+            break
+        (c,i) = t
+        print(len(sequence), i, c)
         words += [c]
-        sequence = sequence[:i+1]
+        sequence = sequence[i+1:]
     out = [dic[k] for k in words]
     return out 
 
-a = huffman_tree([0.1, 0.1, 0.15, 0.16, 2])
+test_text = "Voici un petit texte tout simple, pour essayer la compression"
+elements = [i for i in test_text]
+new_dic = {}
+for e in elements:
+    if e in new_dic.keys():
+        new_dic[e] += 1
+    else:
+        new_dic[e] = 1
+new_dic = dict(sorted(new_dic.items(), key=lambda item:item[1]))
+
+symbols = list(new_dic.keys())
+probas  = list(new_dic.values())
+
+cwd = sorted( get_cwd(huffman_tree(probas)), key = len)
+print(cwd)
+
+convertion_dic1 = { k:v for (k,v) in zip(symbols, cwd)}
+convertion_dic2 = { k:v for (k,v) in zip(cwd, symbols)}
+
+words = "".join([convertion_dic1[c] for c in elements])
+print(words)
+
+out = decode(words, symbols, cwd)
+print(out)
