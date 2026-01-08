@@ -50,11 +50,11 @@ def huffman_tree2(cwd, symbol = ""):
         return  n
     cwdl = [i[1:] for i in cwd if len(i) > 1 and i[0] == "0"]
     cwdr = [i[1:] for i in cwd if len(i) > 1 and i[0] == "1"] 
-    return Node(huffman_tree2(cwdl, "0" + symbol), huffman_tree2(cwdr, "1" + symbol), 0, 0)
+    return Node(huffman_tree2(cwdl, symbol + "0"), huffman_tree2(cwdr, symbol + "1"), 0, 0)
 
-def cwd_detect(tree, seq, idx = 0):
+def cwd_detect(tree, seq, idx):
     if tree.l == None and tree.r == None:
-        return (seq[:idx], idx)
+        return (tree.symbol, idx+1)
     else:
         if idx < len(seq):
             if seq[idx] == "0":
@@ -69,14 +69,14 @@ def decode(seq, symb, cwd):
     words = []
     sequence = "" + seq #copy of seq
     dic = { k:v for (k,v) in zip(cwd, symb)}
+    i = 0
     while len(sequence) > 1:
-        t = cwd_detect(tree, sequence)
+        t = cwd_detect(tree, sequence, i)
         if t == None:
             break
         (c,i) = t
-        print(len(sequence), i, c)
-        words += [c]
-        sequence = sequence[i+1:]
+        #print(len(sequence), i, c)
+        words.append(c)
     out = [dic[k] for k in words]
     return out 
 
