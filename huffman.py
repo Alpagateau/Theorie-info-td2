@@ -54,7 +54,7 @@ def huffman_tree2(cwd, symbol = ""):
 
 def cwd_detect(tree, seq, idx):
     if tree.l == None and tree.r == None:
-        return (tree.symbol, idx+1)
+        return (tree.symbol, idx)
     else:
         if idx < len(seq):
             if seq[idx] == "0":

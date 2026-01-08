@@ -26,8 +26,12 @@ def encoder_decoder_image(img):
 
     encoded = "".join([d[i] for i in img])
     decoded = decode(encoded, symb, code)
+    print(d[230])
+    print(d[150])
     print(d[229])
     print(d[40])
+    print(d[228])
+    print(d[56])
 
     #bits_source = 8*len(img)
     #bits_compressed = len(encoded)
