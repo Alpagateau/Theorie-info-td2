@@ -1,3 +1,6 @@
+from numpy import sort
+
+
 class Node:
     def __init__(self, l = None, r = None, i = 0, p = 0):
         self.l : Node = l
@@ -8,6 +11,8 @@ class Node:
     
     def __str__(self):
         return "( "+str(self.p)+ "("+str(self.i)+"): " +str(self.l) + " | " + str(self.r) +" )"
+
+# ENCODAGE
 
 def huffman_tree(p):
     trees = [Node(None, None, 0, pro) for pro in p]
@@ -38,11 +43,18 @@ def tag_tree(tree, acc, symbols = []):
     acc = tag_tree(tree.r, acc)
     return acc
 
+def avg_length(words, p):
+    return sum([len(words[i])*p[i] for i in range(len(p))])
+
 def huffman_code(p):
+    p = sorted(p, reverse=True)
+    print(sum(p))
     tree = huffman_tree(p) 
     words = get_cwd(tree)
     words = sorted(words, key=len)
-    return (words, sum([len(words[i])*p[i] for i in range(len(p))]))
+    return (words, avg_length(words, p))
+
+# DECODAGE
 
 def huffman_tree2(cwd, symbol = ""):
     if len(cwd) == 0:

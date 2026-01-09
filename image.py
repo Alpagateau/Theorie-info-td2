@@ -22,7 +22,7 @@ def entropie(hist, bar_width):
 #    return -bar_width * np.sum(hist[hist!=0]*np.log2(hist[hist!=0]))
 
 def encoder_decoder_image(img):
-    hist, bin_edges = np.histogram(img, bins=nbins, density=True)
+    hist, bin_edges = np.histogram(img, bins=nbins, density=True, range=(0, 255))
     plt.figure()
     bar_width = bin_edges[1]-bin_edges[0]
     plt.bar(bin_edges[ :-1], hist, align='edge', width=bar_width)
