@@ -51,20 +51,9 @@ Ci-après figurent les images fournies ainsi que leurs histogrammes respectifs:
 	\label{fig:boat}
 \end{figure}
 
-<<<<<<< HEAD
-Les valeurs expérimentales:\\
+Les valeurs expérimentales:
 
 \begin{verbatim}
-=======
-
-\subsection{Compression de texte}
-\subsubsection{Principe}
-Pour la compression de texte, le principe général est très similaire, a quelques différences près. Au lieu d'utiliser comme alphabet source les entiers de 0 a 255, on utilise ici la table ascii (donc des entiers de 0 a 127) réduite aux charactères presents dans le texte. \\
-Aussi, en lieu d'histogramme, on compte le nombre d'occurences de chaques charactères manuellement pour en obtenir la fréquence. Ce sont ensuite les mêmes fonctions qui permettent d'encoder et de décoder le texte.\\
-On définit donc une fonction \texttt{encoder\_décoder\_texte()} qui comme son nom l'indique, encode puis décode un texte, en comparant que le texte décodé est égale a l'entrée. Cette fonctionne retourne aussi l'entropie empirique du texte donné, la longueur moyenne des mots encodés et le taux de compréssion.
-
-\subsubsection{Experimentation}
->>>>>>> 3479052 (Some stuff)
 
 #goldhill.png
 
@@ -87,6 +76,7 @@ Ratio de compression: 0.3379652882415313
 Entropie empirique: 7.185723654928107
 Longueur moyenne du code: 7.246993719362746
 Ratio de compression: 0.9023356437683105
+
 \end{verbatim}
 
 On remarque deux choses:
@@ -94,3 +84,26 @@ On remarque deux choses:
 	\item Les longueurs moyennes sont bien comprises entre H et H+1, donc le code respecte bien le théorème de Shannon.
 	\item Le ratio de compression et la longueur moyenne associés à \texttt{moon.png} sont largement inférieurs à ceux des deux autres images, ce qui s'accorde avec le résultat attendu, car comme on peut le voir sur l'image et sur son histogramme, elle est composée principalement de pixels noirs, donc l'entropie de l'image est moindre (elle porte peu d'information) et il est possible de la compresser davantage.
 \end{itemize}
+
+\subsection{Compression de texte}
+\subsubsection{Principe}
+Pour la compression de texte, le principe général est très similaire, a quelques différences près. Au lieu d'utiliser comme alphabet source les entiers de 0 a 255, on utilise ici la table ascii (donc des entiers de 0 a 127) réduite aux charactères presents dans le texte. \\
+Aussi, en lieu d'histogramme, on compte le nombre d'occurences de chaques charactères manuellement pour en obtenir la fréquence. Ce sont ensuite les mêmes fonctions qui permettent d'encoder et de décoder le texte.\\
+On définit donc une fonction \texttt{encoder\_décoder\_texte()} qui comme son nom l'indique, encode puis décode un texte, en comparant que le texte décodé est égale a l'entrée. Cette fonctionne retourne aussi l'entropie empirique du texte donné, la longueur moyenne des mots encodés et le taux de compréssion.
+
+\subsubsection{Experimentation}
+
+Voici les resultats des la compression de textes : \newline
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+  \hline texte source & entropie & longueur moyenne & ratio de compression \\
+  \hline
+    buscon & 4.41 & 4.45 & 0.55 \\
+    candide & 4.57 & 4.59 & 0.57 \\
+    dorian & 4.48 & 4.52 & 0.56 \\
+    clair de lune & 4.50 & 4.53 & 0.56 \\
+    \hline
+\end{tabular}
+\end{center}
+
+On remarque que la taille finale des textes est environs réduite de moitié. On peut attribuer ça a la loi de Zipf qui stipule que dans une langue naturelle, le charactère le plus présent est environs deux fois plus commun que le second plus présent (et ainsi de suite). On peut alors supposer que quelques charactères sont représenté par des mots très cours, mais que ceux-ci représente une grosse partie du texte source.
