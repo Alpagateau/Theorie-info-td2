@@ -5,12 +5,16 @@ from huffman import *
 buscon = list(open('./buscon.txt','r').read())
 candide = list(open('./candide.txt','r').read())
 dorian = list(open('./dorian.txt','r').read())
-clair_de_lune = list(open('./clair_de_lune.txt','r').read())
+clair_de_lune = list(open('./clair-de-lune.txt','r').read())
 
-nbins = 256
+def entropie(hist):
+    H = 0
+    print("entropie type hits", type(hist))
+    for i in range(len(hist)):
+        if hist[i] != 0:
+            H += hist[i] * np.log2(hist[i])
+    return -H
 
-def entropie(probas):
-    return -np.sum(probas*np.log(probas))
 
 def count_chars(t):
     d = {  }
