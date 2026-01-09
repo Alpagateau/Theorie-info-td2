@@ -11,7 +11,10 @@ Pour encoder l'image on joint le tableau des "mots" encodés en binaire en une s
 On affiche enfin à l'écran les valeurs demandées.
 
 \subsubsection{Expérimentations}
-\begin{figure}[h!]
+
+Ci-après figurent les images fournies ainsi que leurs histogrammes respectifs:
+
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.4\linewidth}
 		\includegraphics[width=\linewidth]{goldhill.png}
@@ -23,7 +26,7 @@ On affiche enfin à l'écran les valeurs demandées.
 	\end{subfigure}
 	\label{fig:goldhill}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.4\linewidth}
 		\includegraphics[width=\linewidth]{moon.png}
@@ -35,7 +38,7 @@ On affiche enfin à l'écran les valeurs demandées.
 	\end{subfigure}
 	\label{fig:moon}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.4\linewidth}
 		\includegraphics[width=\linewidth]{boat.png}
@@ -48,7 +51,35 @@ On affiche enfin à l'écran les valeurs demandées.
 	\label{fig:boat}
 \end{figure}
 
-\\
+Les valeurs expérimentales:\\
 
-\verbatim
+\begin{verbatim}
 
+#goldhill.png
+
+Entropie empirique: 7.472173225084263
+Longueur moyenne du code: 7.526447610294115
+Ratio de compression: 0.9371309280395508
+
+=============================================
+
+#moon.png
+
+Entropie empirique: 2.465213838156748
+Longueur moyenne du code: 2.714325138504536
+Ratio de compression: 0.3379652882415313
+
+=============================================
+
+#boat.png
+
+Entropie empirique: 7.185723654928107
+Longueur moyenne du code: 7.246993719362746
+Ratio de compression: 0.9023356437683105
+\end{verbatim}
+
+On remarque deux choses:
+\begin{itemize}
+	\item Les longueurs moyennes sont bien comprises entre H et H+1, donc le code respecte bien le théorème de Shannon.
+	\item Le ratio de compression et la longueur moyenne associés à \texttt{moon.png} sont largement inférieurs à ceux des deux autres images, ce qui s'accorde avec le résultat attendu, car comme on peut le voir sur l'image et sur son histogramme, elle est composée principalement de pixels noirs, donc l'entropie de l'image est moindre (elle porte peu d'information) et il est possible de la compresser davantage.
+\end{itemize}

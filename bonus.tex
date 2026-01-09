@@ -1,8 +1,8 @@
-\section{Pour aller plus loins}
-La question est, peut on améliorer cet algorithme. On sait que les codes de Huffman sont optimaux, et donc le seul moyen d'améliorer le ration de compréssion serait de réduire l'entropie de la source. Voici donc une proposition d'algorithme pour réduire l'entropie de la source avant de la compresser par huffman.
+\section{Pour aller plus loin}
+La question est, peut-on améliorer cet algorithme? On sait que les codes de Huffman sont optimaux, et donc le seul moyen d'améliorer le ratio de compression serait de réduire l'entropie de la source. Voici donc une proposition d'algorithme pour réduire l'entropie de la source avant de la compresser par Huffman.
 
 \subsection{Proposition d'algorithme}
-L'idée de cet algorithme consiste a remplacer la valeur de chaque pixel par la différence entre lui et le pixel précédant. C'est ce qu'on appel du \texttt{Delta Encoding}.
+L'idée de cet algorithme consiste a remplacer la valeur de chaque pixel par la différence entre lui et le pixel précédent. C'est ce qu'on appelle du \texttt{Delta Encoding}.
 Voici un exemple de code C pour encoder un tableau ainsi :
 
 \begin{verbatim}
@@ -17,4 +17,4 @@ void encode(static char* input, int input_len, char* output)
 }
 \end{verbatim}
 
-Si une image n'est pas aléatoire, c'est a dire qu'elle contient des patternes (comme par exemple une photographie), on peut s'attendre a des différences similaires a plusieurs endroits de la photo. Par exemple, avec cet encodage préalable, tous les aplats de couleurs seronts représentés par des 0. On peut donc s'attendre a une entropie réduite, et donc a un code de Huffman plus éfficace. Cette méthode est nottament utilisé dans les images aux format \texttt{png} \footnote{https://www.w3.org/TR/png-3/\#7Filtering}.
+Si une image n'est pas aléatoire, c'est-à-dire qu'elle contient des patterns (comme par exemple une photographie), on peut s'attendre à des différences similaires à plusieurs endroits de la photo. Par exemple, avec cet encodage préalable, tous les aplats de couleurs seront représentés par des 0. On peut donc s'attendre à une entropie réduite, et donc à un code de Huffman plus efficace. Cette méthode est notamment utilisée dans les images aux format \texttt{png} \footnote{https://www.w3.org/TR/png-3/\#7Filtering}.

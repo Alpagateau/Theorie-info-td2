@@ -7,4 +7,5 @@
 \contentsline {subsection}{\numberline {3.1}Compression d'images}{6}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Principe}{6}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Expérimentations}{6}{subsubsection.3.1.2}%
-\contentsline {section}{\numberline {4}Pour aller plus loins}{8}{section.4}%
+\contentsline {section}{\numberline {4}Pour aller plus loins}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Proposition d'algorithme}{9}{subsection.4.1}%

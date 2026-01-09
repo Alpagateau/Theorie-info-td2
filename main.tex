@@ -13,6 +13,7 @@
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{subcaption}
+\usepackage{float}
 
 \setlength\parindent{0pt}
 \lstset{
@@ -35,7 +36,7 @@
 \section{Introduction}
 
 \noindent Dans ce TP, nous avons implémenté l'algorithme de Huffman dans le but d'encoder et de compresser des images ou du texte.
-Pour ce faire, nous avons en premier lieu implémenté l'algorithme de compréssion en python, puis nous l'avons adapté aux diverses utilisations possible.
+Pour ce faire, nous avons en premier lieu implémenté l'algorithme de compréssion en python, puis nous l'avons adapté aux diverses utilisations possibles.
 
 \newpage
 %Table des matières
@@ -45,14 +46,14 @@ Pour ce faire, nous avons en premier lieu implémenté l'algorithme de compréss
 \section{Algorithme de Huffman et codage source}
 L'algorithme de Huffman est un algorithme de \textbf{codage source}. L'objectif est de réduire la longueur moyenne des mots de code. Voici le fonctionnement de l'algorithme de Huffman étape par étape.
 \newline
-Ici, nous gardon l'implémentation la plus générale possible. On ne sait pas quel type de données on encode, mais l'algorithme fonctionne de la même manière pour tout type.
+Ici, nous gardons l'implémentation la plus générale possible. On ne sait pas quel type de données on encode, mais l'algorithme fonctionne de la même manière pour tout type.
 
 \subsection{Arbre de Huffman}
-La première étape est de construire un arbre binaire tel que la profondeur d'un mot\footnote{c'est a dire sa distance a la racine} dans l'arbre soit inversement correllée a sa fréquence d'apparition.\newline
+La première étape est de construire un arbre binaire tel que la profondeur d'un mot\footnote{c'est-à-dire sa distance à la racine} dans l'arbre soit inversement correllée a sa fréquence d'apparition.\newline
 Nous définissons un arbre de manière récursive en créant une classe \texttt{Noeud} avec deux enfants (droite et gauche) ainsi qu'une étiquette et un indice. L'algorithme utilisé fonctionne comme suit :
 \newline
 \begin{verbatim}
-Entrée : p une Liste de nombre d'occurence de chaque mot de code.
+Entrée : p une Liste de nombre d'occurences de chaque mot de code.
 Sortie : Arbre binaire de Huffman
 Algorithme : 
 arbres = liste_de_nombres_vers_liste_de_feuilles(p)
@@ -73,19 +74,19 @@ retourner premier_élément(arbres)
     \caption*{Fonctionnement de l'algorithme de Huffman sur une liste d'entiers}
 \end{figure}
 
-Cet algorithme nous donne bien un arbre binaire, dont les feuilles correspondent aux éléments de la liste de départ, et dont la profondeur des feuilles est inversement correllée a leur valeur.
+Cet algorithme nous donne bien un arbre binaire, dont les feuilles correspondent aux éléments de la liste de départ, et dont la profondeur des feuilles est inversement correllée à leur probabilité.
 
 \subsection{Nouveau code}
 De cet arbre, on peut définir une table de conversion \texttt{mot} $\rightarrow$ \texttt{code} de la façon suivante:
 \begin{itemize}
-  \item On crée une liste des mots encodées, on concatene 1 pour l'enfant de droite, 0 pour l'enfant de gauche.
-  \item On associe chaque code a un mot source en fonction de sa fréquence. Mot très fréquent $\rightarrow$ Code court\footnote{On remarque qu'il n'existe pas une seule et unique façon d'associer les mots et les codes. En effet, deux codes de même longueur peuvent être interchangé sans impacter la validité de l'algorithme.}.
+  \item On crée une liste des mots encodés, on concatène 1 pour l'enfant de droite, 0 pour l'enfant de gauche.
+  \item On associe chaque code à un mot source en fonction de sa fréquence. Mot très fréquent $\rightarrow$ Code court\footnote{On remarque qu'il n'existe pas une seule et unique façon d'associer les mots et les codes. En effet, deux codes de même longueur peuvent être interchangés sans impacter la validité de l'algorithme.}.
 \end{itemize}
 
-Grâce a cette table d'association, on peut alors encoder un à un les mots de la source, afin d'obtenir le message encodé.
+Grâce à cette table d'association, on peut alors encoder un à un les mots de la source, afin d'obtenir le message encodé.
 
 \subsection{Décodage}
-Une fois encoder, on peut décoder les données en utilisant le même arbre. Les codes de Huffman étant préfixes, le décode peut se faire de manière "gloutonne". Le décodage se fait en prenant chaque bit l'un après l'autre, en déçandant l'arbre jusqu'a arriver a une feuille. Par construction, on a la certitude que cette feuille correspond bien au mot encodé.
+Une fois encodées, on peut décoder les données en utilisant le même arbre. Les codes de Huffman étant préfixes, le décode peut se faire de manière "gloutonne". Le décodage se fait en prenant chaque bit l'un après l'autre, en descendant l'arbre jusqu'à arriver à une feuille. Par construction, on a la certitude que cette feuille correspond bien au mot encodé.
 \newline
 Ainsi, notre algorithme de décodage fonctionne ainsi :
 \begin{verbatim}
@@ -100,7 +101,7 @@ Ainsi, notre algorithme de décodage fonctionne ainsi :
     si est_feuille(noeud_curseur) :
       seq = enlever_n_premier_bits(seq, longueure)
       décodé = concatener(décodé, mot(noeud_curseur))
-      longueure = 0
+      longueur = 0
       noeud_curseur = tree
     sinon
       si seq[0] = 0 : 
@@ -114,6 +115,6 @@ Ainsi, notre algorithme de décodage fonctionne ainsi :
 
 \newpage
 \section{Application}
-%\include{application}
+\include{application}
 \include{bonus}
 \end{document}
