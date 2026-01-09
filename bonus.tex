@@ -1,1 +1,20 @@
-\newpage
+\section{Pour aller plus loins}
+La question est, peut on améliorer cet algorithme. On sait que les codes de Huffman sont optimaux, et donc le seul moyen d'améliorer le ration de compréssion serait de réduire l'entropie de la source. Voici donc une proposition d'algorithme pour réduire l'entropie de la source avant de la compresser par huffman.
+
+\subsection{Proposition d'algorithme}
+L'idée de cet algorithme consiste a remplacer la valeur de chaque pixel par la différence entre lui et le pixel précédant. C'est ce qu'on appel du \texttt{Delta Encoding}.
+Voici un exemple de code C pour encoder un tableau ainsi :
+
+\begin{verbatim}
+void encode(static char* input, int input_len, char* output)
+{
+  //On suppose que output est initialisé a 0
+  output[0] = input[0];
+  for(int i = 1; i < input_len; i++)
+  {
+    output[i] = input[i] - input[i-1];
+  }
+}
+\end{verbatim}
+
+Si une image n'est pas aléatoire, c'est a dire qu'elle contient des patternes (comme par exemple une photographie), on peut s'attendre a des différences similaires a plusieurs endroits de la photo. Par exemple, avec cet encodage préalable, tous les aplats de couleurs seronts représentés par des 0. On peut donc s'attendre a une entropie réduite, et donc a un code de Huffman plus éfficace. Cette méthode est nottament utilisé dans les images aux format \texttt{png} \footnote{https://www.w3.org/TR/png-3/\#7Filtering}.

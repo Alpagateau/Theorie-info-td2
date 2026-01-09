@@ -5,3 +5,4 @@
 \contentsline {subsection}{\numberline {2.3}Décodage}{4}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Application}{5}{section.3}%
 \contentsline {section}{\numberline {4}Pour aller plus loins}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Proposition d'algorithme}{6}{subsection.4.1}%
