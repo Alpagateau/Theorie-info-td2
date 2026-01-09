@@ -44,6 +44,8 @@ Pour ce faire, nous avons en premier lieu implémenté l'algorithme de compréss
 
 \section{Algorithme de Huffman et codage source}
 L'algorithme de Huffman est un algorithme de \textbf{codage source}. L'objectif est de réduire la longueur moyenne des mots de code. Voici le fonctionnement de l'algorithme de Huffman étape par étape.
+\newline
+Ici, nous gardon l'implémentation la plus générale possible. On ne sait pas quel type de données on encode, mais l'algorithme fonctionne de la même manière pour tout type.
 
 \subsection{Arbre de Huffman}
 La première étape est de construire un arbre binaire tel que la profondeur d'un mot\footnote{c'est a dire sa distance a la racine} dans l'arbre soit inversement correllée a sa fréquence d'apparition.\newline
@@ -80,11 +82,38 @@ De cet arbre, on peut définir une table de conversion \texttt{mot} $\rightarrow
   \item On associe chaque code a un mot source en fonction de sa fréquence. Mot très fréquent $\rightarrow$ Code court\footnote{On remarque qu'il n'existe pas une seule et unique façon d'associer les mots et les codes. En effet, deux codes de même longueur peuvent être interchangé sans impacter la validité de l'algorithme.}.
 \end{itemize}
 
+Grâce a cette table d'association, on peut alors encoder un à un les mots de la source, afin d'obtenir le message encodé.
+
+\subsection{Décodage}
+Une fois encoder, on peut décoder les données en utilisant le même arbre. Les codes de Huffman étant préfixes, le décode peut se faire de manière "gloutonne". Le décodage se fait en prenant chaque bit l'un après l'autre, en déçandant l'arbre jusqu'a arriver a une feuille. Par construction, on a la certitude que cette feuille correspond bien au mot encodé.
+\newline
+Ainsi, notre algorithme de décodage fonctionne ainsi :
+\begin{verbatim}
+  Entrée : seq une séquence de bits représentant les mots codés, 
+           tree l'arbre utilisé pour les encoder.
+  Sortie : une séquence de mots décodés
+  Algorithme :
+  offset := 0
+  noeud_curseur := tree 
+  décodé := []
+  tant que seq n'est pas vide:
+    si est_feuille(noeud_curseur) :
+      seq = enlever_n_premier_bits(seq, longueure)
+      décodé = concatener(décodé, mot(noeud_curseur))
+      longueure = 0
+      noeud_curseur = tree
+    sinon
+      si seq[0] = 0 : 
+        noeud_curseur = noeud_curseur.enfant_gauche
+      sinon : 
+        noeud_curseur = neoud_curseur.enfant_droit
+      longueur = longueur + 1
+
+  retourner décodé
+\end{verbatim}
+
 \newpage
 \section{Application}
-\include{application}
-\newpage
-\section{Pour aller plus loins}
+%\include{application}
 \include{bonus}
-
 \end{document}
