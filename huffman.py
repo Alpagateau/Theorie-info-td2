@@ -41,7 +41,8 @@ def tag_tree(tree, acc, symbols = []):
 def huffman_code(p):
     tree = huffman_tree(p) 
     words = get_cwd(tree)
-    return (words, sum([len(w)/len(words) for w in words]))
+    words = sorted(words, key=len)
+    return (words, sum([len(words[i])*p[i] for i in range(len(p))]))
 
 def huffman_tree2(cwd, symbol = ""):
     if len(cwd) == 0:
@@ -75,7 +76,6 @@ def decode(seq, symb, cwd):
         if t == None:
             break
         (c,i) = t
-        #print(len(sequence), i, c)
         words.append(c)
     out = [dic[k] for k in words]
     return out 
