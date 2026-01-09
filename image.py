@@ -1,3 +1,5 @@
+#!/bin/python
+
 import PIL as pil
 import numpy as np
 from matplotlib import pyplot as plt
@@ -10,7 +12,13 @@ boat = list(pil.Image.open('./boat.png').getdata())
 nbins = 256
 
 def entropie(hist, bar_width):
-    return -bar_width * np.sum(hist[hist!=0]*np.log2(hist[hist!=0]))
+    H = 0
+    for i in len(hist):
+        if hist[i] != 0:
+            H += hist[i] * np.log2(hist[i])
+    H *= -bar_width
+    return H
+#    return -bar_width * np.sum(hist[hist!=0]*np.log2(hist[hist!=0]))
 
 def encoder_decoder_image(img):
     hist, bin_edges = np.histogram(img, bins=nbins, density=True)
