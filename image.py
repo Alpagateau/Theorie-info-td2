@@ -13,7 +13,8 @@ nbins = 256
 
 def entropie(hist, bar_width):
     H = 0
-    for i in len(hist):
+    print("entropie type hits", type(hist))
+    for i in range(len(hist)):
         if hist[i] != 0:
             H += hist[i] * np.log2(hist[i])
     H *= -bar_width
@@ -30,6 +31,8 @@ def encoder_decoder_image(img):
     hist = sorted(hist, reverse=True)
     code, L = huffman_code(hist)
     d = { k:v for k, v in zip(symb, code) }
+
+    print("Hist type : ", type(hist))
 
     encoded = "".join([d[i] for i in img])
     decoded = decode(encoded, symb, code)
