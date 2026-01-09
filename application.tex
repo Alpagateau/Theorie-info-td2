@@ -2,7 +2,9 @@
 \subsubsection{Principe}
 
 On se propose d'appliquer l'algorithme de Huffman en compressant des images en niveaux de gris, qui seront représentées, à l'aide de la bibliothèque Image de Python, par des tableaux d'entiers compris entre 0 et 255. 
-On définit donc une fonction \verb{encoder_decoder(image)} qui encode puis décode une image avec les fonctions définies précedemment, teste si l'image décodée est égale à l'originale, puis affiche à l'écran les valeurs de l'entropie empirique, de la longueur moyenne et du ratio de compression.
-Pour une image donnée, on commence par afficher l'histogramme des valeurs prises, que l'on utilisera ensuite comme tableau de probabilités. On génère aussi un tableau d'entiers de 0 à 255 comme tableau des symboles. Pour respecter la précondition des fonctions de \verb{huffman}, on doit trier préalablement le tableau des probabilités par ordre décroissant, en triant dans l'ordre correspondant le tableau de symboles.
-Pour encoder l'image on joint le tableau des "mots" encodés en binaire en une seule chaîne de caractères, et pour la décoder, on utilise la fonction \verb{decode} et la liste des mots de code correspondants aux symboles, générée grâce à la fonction \verb{huffman_code}.
-On affiche enfin à l'écran les valeurs demandées
+On définit donc une fonction \texttt{encoder_decoder(image)} qui encode puis décode une image avec les fonctions définies précedemment, teste si l'image décodée est égale à l'originale, puis affiche à l'écran les valeurs de l'entropie empirique, de la longueur moyenne et du ratio de compression.
+Pour une image donnée, on commence par afficher l'histogramme des valeurs prises, que l'on utilisera ensuite comme tableau de probabilités. On génère aussi un tableau d'entiers de 0 à 255 comme tableau des symboles. Pour respecter la précondition des fonctions de \texttt{huffman}, on doit trier préalablement le tableau des probabilités par ordre décroissant, en triant dans l'ordre correspondant le tableau de symboles.
+Pour encoder l'image on joint le tableau des "mots" encodés en binaire en une seule chaîne de caractères, et pour la décoder, on utilise la fonction \texttt{decode} et la liste des mots de code correspondants aux symboles, générée grâce à la fonction \texttt{huffman_code}.
+On affiche enfin à l'écran les valeurs demandées.
+
+\subsubsection{Expérimentations}
