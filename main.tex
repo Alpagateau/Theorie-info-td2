@@ -1,0 +1,84 @@
+\documentclass[a4paper,11pt]{article}
+
+%\usepackage[french]{babel}
+\usepackage{color,xcolor,ucs}
+\usepackage[top=1.2in, bottom=1.2in, left = 1in, right = 1in]{geometry}
+\usepackage[linkcolor=black,colorlinks=true,urlcolor=blue]{hyperref}
+
+%Includes
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{listings}
+
+\setlength\parindent{0pt}
+\lstset{
+  basicstyle=\small,
+  extendedchars=true,
+  literate={à}{{\`a}}1 {<-}{{$\leftarrow$}}1,
+}
+
+\title{Rapport de travaux dirigés, Arbes de Huffman}
+\author{TAMISIER Joshua - NADAUD Martin}
+
+\begin{document}
+\maketitle
+\begin{center}
+\rule{\textwidth}{1pt}
+
+\end{center}
+
+\vspace*{\fill}
+\section{Introduction}
+
+\noindent Dans ce TP, nous avons implémenter l'algorithme de Huffman dans le but d'encoder et de compresser des images ou du texte.
+Pour ce faire, nous avons en premier lieu implémenté l'algorithme de compréssion en python, puis nous l'avons adapté aux diverses utilisations possible.
+
+\newpage
+%Table des matières
+\tableofcontents
+\newpage
+
+\section{Algorithme de Huffman et codage source}
+L'algorithme de Huffman est un algorithme de \textbf{codage source}. L'objectif est de réduire la longueur moyenne des mots de code. Voici le fonctionnement de l'algorithme de Huffman étape par étape.
+
+\subsection{Arbre de Huffman}
+La première étape est de construire un arbre binaire tel que la profondeur d'un mot\footnote{c'est a dire sa distance a la racine} dans l'arbre soit inversement correllée a sa fréquence d'apparition.\newline
+Nous définissons un arbre de manière récursive en créant une classe \texttt{Noeud} avec deux enfants (droite et gauche) ainsi qu'une étiquette et un indice. L'algorithme utilisé fonctionne comme suit :
+\newline
+\begin{verbatim}
+Entrée : p une Liste de nombre d'occurence de chaque mot de code.
+Sortie : Arbre binaire de Huffman
+Algorithme : 
+arbres = liste_de_nombres_vers_liste_de_feuilles(p)
+tant que arbres contient au moins 2 éléments
+    trier(arbres)
+    nouvel_arbre = Noeud(
+      enfant_droit  : avant_dernier(arbres), 
+      enfant_gauche : dernier(arbres)
+    )
+    arbres = concatener( tous_sauf_n_derniers(arbres, 2), nouvel_arbre)
+
+retourner premier_élément(arbres)
+\end{verbatim}
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.55 \linewidth]{huffman_alg.png}
+    \caption*{Fonctionnement de l'algorithme de Huffman sur une liste d'entiers}
+\end{figure}
+
+Cet algorithme nous donne bien un arbre binaire, dont les feuilles correspondent aux éléments de la liste de départ, et dont la profondeur des feuilles est inversement correllée a leur valeur.
+
+\subsection{Nouveau code}
+De cet arbre, on peut définir une table de conversion \texttt{mot} $\rightarrow$ \texttt{code} de la façon suivante:
+\begin{itemize}
+  \item On crée une liste des mots encodées, on concatene 1 pour l'enfant de droite, 0 pour l'enfant de gauche.
+  \item On associe chaque code a un mot source en fonction de sa fréquence. Mot très fréquent $\rightarrow$ Code court\footnote{On remarque qu'il n'existe pas une seule et unique façon d'associer les mots et les codes. En effet, deux codes de même longueur peuvent être interchangé sans impacter la validité de l'algorithme.}.
+\end{itemize}
+
+
+
+\end{document}
