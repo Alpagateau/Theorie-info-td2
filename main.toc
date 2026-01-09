@@ -3,4 +3,7 @@
 \contentsline {subsection}{\numberline {2.1}Arbre de Huffman}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Nouveau code}{4}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Application}{5}{section.3}%
-\contentsline {section}{\numberline {4}Pour aller plus loins}{6}{section.4}%
+\contentsline {subsection}{\numberline {3.1}Compression d'images}{6}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Principe}{6}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Expérimentations}{6}{subsubsection.3.1.2}%
+\contentsline {section}{\numberline {4}Pour aller plus loins}{8}{section.4}%
