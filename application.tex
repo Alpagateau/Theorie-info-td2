@@ -51,9 +51,20 @@ Ci-après figurent les images fournies ainsi que leurs histogrammes respectifs:
 	\label{fig:boat}
 \end{figure}
 
+<<<<<<< HEAD
 Les valeurs expérimentales:\\
 
 \begin{verbatim}
+=======
+
+\subsection{Compression de texte}
+\subsubsection{Principe}
+Pour la compression de texte, le principe général est très similaire, a quelques différences près. Au lieu d'utiliser comme alphabet source les entiers de 0 a 255, on utilise ici la table ascii (donc des entiers de 0 a 127) réduite aux charactères presents dans le texte. \\
+Aussi, en lieu d'histogramme, on compte le nombre d'occurences de chaques charactères manuellement pour en obtenir la fréquence. Ce sont ensuite les mêmes fonctions qui permettent d'encoder et de décoder le texte.\\
+On définit donc une fonction \texttt{encoder\_décoder\_texte()} qui comme son nom l'indique, encode puis décode un texte, en comparant que le texte décodé est égale a l'entrée. Cette fonctionne retourne aussi l'entropie empirique du texte donné, la longueur moyenne des mots encodés et le taux de compréssion.
+
+\subsubsection{Experimentation}
+>>>>>>> 3479052 (Some stuff)
 
 #goldhill.png
 
