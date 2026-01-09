@@ -1,3 +1,5 @@
+
+\section{Application}
 \subsection{Compression d'images}
 \subsubsection{Principe}
 
@@ -10,7 +12,7 @@ Pour une image donnée, on commence par afficher l'histogramme des valeurs prise
 Pour encoder l'image on joint le tableau des "mots" encodés en binaire en une seule chaîne de caractères, et pour la décoder, on utilise la fonction \texttt{decode} et la liste des mots de code correspondants aux symboles, générée grâce à la fonction \texttt{huffman\_code}.
 On affiche enfin à l'écran les valeurs demandées.
 
-\subsubsection{Expérimentations}
+\subsubsection{Expérimentation}
 
 Ci-après figurent les images fournies ainsi que leurs histogrammes respectifs:
 
@@ -87,13 +89,13 @@ On remarque deux choses:
 
 \subsection{Compression de texte}
 \subsubsection{Principe}
-Pour la compression de texte, le principe général est très similaire, a quelques différences près. Au lieu d'utiliser comme alphabet source les entiers de 0 a 255, on utilise ici la table ascii (donc des entiers de 0 a 127) réduite aux charactères presents dans le texte. \\
-Aussi, en lieu d'histogramme, on compte le nombre d'occurences de chaques charactères manuellement pour en obtenir la fréquence. Ce sont ensuite les mêmes fonctions qui permettent d'encoder et de décoder le texte.\\
-On définit donc une fonction \texttt{encoder\_décoder\_texte()} qui comme son nom l'indique, encode puis décode un texte, en comparant que le texte décodé est égale a l'entrée. Cette fonctionne retourne aussi l'entropie empirique du texte donné, la longueur moyenne des mots encodés et le taux de compréssion.
+Pour la compression de texte, le principe général est très similaire, à quelques différences près. Au lieu d'utiliser comme alphabet source les entiers de 0 a 255, on utilise ici la table ascii (donc des entiers de 0 a 127) réduite aux caractères presents dans le texte. \\
+Aussi, en lieu d'histogramme, on compte le nombre d'occurences de chaque caractère manuellement pour en obtenir la fréquence d'apparition. Ce sont ensuite les mêmes fonctions qui permettent d'encoder et de décoder le texte.\\
+On définit donc une fonction \texttt{encoder\_décoder\_texte()} qui comme son nom l'indique, encode puis décode un texte, en comparant que le texte décodé est égal à l'entrée. Cette fonction retourne aussi l'entropie empirique du texte donné, la longueur moyenne des mots encodés et le taux de compression.
 
-\subsubsection{Experimentation}
+\subsubsection{Expérimentation}
 
-Voici les resultats des la compression de textes : \newline
+Voici les résultats de la compression des textes : \newline
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
   \hline texte source & entropie & longueur moyenne & ratio de compression \\
@@ -106,4 +108,4 @@ Voici les resultats des la compression de textes : \newline
 \end{tabular}
 \end{center}
 
-On remarque que la taille finale des textes est environs réduite de moitié. On peut attribuer ça a la loi de Zipf qui stipule que dans une langue naturelle, le charactère le plus présent est environs deux fois plus commun que le second plus présent (et ainsi de suite). On peut alors supposer que quelques charactères sont représenté par des mots très cours, mais que ceux-ci représente une grosse partie du texte source.
+On remarque que la taille finale des textes est environ réduite de moitié. On peut attribuer cela à la loi de Zipf qui stipule que dans une langue naturelle, le caractère le plus présent est environ deux fois plus commun que le second plus présent (et ainsi de suite). On peut alors supposer que quelques caractères sont représentés par des mots très courts, mais que ceux-ci représentent une grosse partie du texte source.
